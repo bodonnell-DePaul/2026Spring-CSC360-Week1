@@ -1,0 +1,316 @@
+<!-- This is an example of poorly-structured AI-generated code. Can you spot the issues? See the companion good example for comparison. -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Portfolio</title>
+  <style>
+    .header_bar { background: #333; padding: 10px; }
+    .Header-Link { color: white; margin: 10px; text-decoration: none; }
+    .Header-Link:hover { color: gray; }
+    .myButton { background: #333; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    .myButton:hover { background: #555; }
+    .card { background: white; border: 1px solid #ddd; width: 350px; margin: 10px; display: inline-block; vertical-align: top; }
+    .card img { width: 350px; height: 200px; }
+    .SKILLS_BOX { background: #f0f0f0; padding: 20px; width: 800px; margin: 0 auto; }
+    /* This duplicates styles already defined inline */
+    .card { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .card { border-radius: 5px; }
+    /* Overly specific selectors */
+    body > div > div > div > div > span.project-title { font-size: 18px; font-weight: bold; }
+    body > div > div > div > div > div > span.project-desc { font-size: 14px; color: #666; }
+  </style>
+</head>
+<body style="font-family: Arial; margin: 0; padding: 0; background: #f5f5f5;">
+
+  <!-- No semantic header element, just a div -->
+  <div class="header_bar" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div style="color: white; font-size: 24px; font-weight: bold; padding-left: 20px;">My Portfolio</div>
+    <div>
+      <a class="Header-Link" href="#about">About</a>
+      <a class="Header-Link" href="#projects">Projects</a>
+      <a class="Header-Link" href="#skills">Skills</a>
+      <a class="Header-Link" href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- Hero section with fixed pixel widths and inline styles everywhere -->
+  <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 80px 0; text-align: center; width: 100%;">
+    <div style="width: 800px; margin: 0 auto;">
+      <div>
+        <div>
+          <div>
+            <!-- Deeply nested divs for no reason -->
+            <div>
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid white;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="color: white; font-size: 42px; font-weight: bold; margin-top: 20px;">Hi, I'm Jordan</div>
+      <div style="color: #ddd; font-size: 18px; margin-top: 10px;">Web Developer & Designer</div>
+      <div style="margin-top: 30px;">
+        <a href="#projects" style="background: white; color: #667eea; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-right: 10px;">See My Work</a>
+        <a href="#contact" style="border: 2px solid white; color: white; padding: 10px 30px; border-radius: 5px; text-decoration: none; font-weight: bold;">Contact Me</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- About section - all divs, no semantic markup -->
+  <div id="about" style="width: 800px; margin: 0 auto; padding: 60px 0;">
+    <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">About Me</div>
+    <div style="color: #888; margin-bottom: 30px;">A little about myself</div>
+
+    <div style="display: flex;">
+      <div style="width: 400px; padding-right: 40px;">
+        <div style="color: #666; margin-bottom: 15px; line-height: 1.6;">I'm a web developer with experience building websites and apps. I know React and Node and other stuff. I like coding and making things look good.</div>
+        <div style="color: #666; margin-bottom: 15px; line-height: 1.6;">I went to school at DePaul University in Chicago. I graduated with a CS degree and now I do freelance work.</div>
+      </div>
+      <div style="display: flex; gap: 20px;">
+        <div style="text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; width: 120px;">
+          <div style="font-size: 28px; font-weight: bold; color: #667eea;">4+</div>
+          <div style="font-size: 12px; color: #999;">Years Exp</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; width: 120px;">
+          <div style="font-size: 28px; font-weight: bold; color: #667eea;">30+</div>
+          <div style="font-size: 12px; color: #999;">Projects</div>
+        </div>
+        <div style="text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; width: 120px;">
+          <div style="font-size: 28px; font-weight: bold; color: #667eea;">12</div>
+          <!-- Poor color contrast: light gray on light background -->
+          <div style="font-size: 12px; color: #ccc;">Clients</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects section -->
+  <div id="projects" style="background: #eee; padding: 60px 0;">
+    <div style="width: 800px; margin: 0 auto;">
+      <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">My Projects</div>
+      <div style="color: #888; margin-bottom: 30px;">Some things I built</div>
+
+      <!-- Fixed width cards that won't wrap properly on smaller screens -->
+      <div style="text-align: center;">
+
+        <!-- Card 1 — no alt text on image -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop">
+          <div style="padding: 15px;">
+            <div>
+              <div>
+                <div>
+                  <span class="project-title" style="font-size: 18px; font-weight: bold;">TaskFlow</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <span class="project-desc" style="font-size: 14px; color: #666;">A kanban board app for teams</span>
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px; margin-right: 5px;">React</span>
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px; margin-right: 5px;">Node</span>
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="#" style="color: #667eea; margin-right: 15px;">Demo</a>
+              <a href="#" style="color: #667eea;">Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 — no alt text again -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop">
+          <div style="padding: 15px;">
+            <div>
+              <div>
+                <div>
+                  <span style="font-size: 18px; font-weight: bold;">BudgetBuddy</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <span style="font-size: 14px; color: #666;">A money tracking app</span>
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px; margin-right: 5px;">Vue</span>
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px; margin-right: 5px;">Firebase</span>
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="#" style="color: #667eea; margin-right: 15px;">Demo</a>
+              <a href="#" style="color: #667eea;">Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&h=400&fit=crop">
+          <div style="padding: 15px;">
+            <div>
+              <div>
+                <div>
+                  <span style="font-size: 18px; font-weight: bold;">WeatherNow</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <span style="font-size: 14px; color: #666;">A weather app</span>
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px;">JavaScript</span>
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="#" style="color: #667eea; margin-right: 15px;">Demo</a>
+              <a href="#" style="color: #667eea;">Code</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop">
+          <div style="padding: 15px;">
+            <div>
+              <div>
+                <div>
+                  <span style="font-size: 18px; font-weight: bold;">DevBlog</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div>
+                <!-- Poor contrast: very light text -->
+                <span style="font-size: 14px; color: #ccc;">A blog platform</span>
+              </div>
+            </div>
+            <div style="margin-top: 10px;">
+              <span style="background: #e8e8e8; padding: 3px 10px; border-radius: 10px; font-size: 12px;">Next.js</span>
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="#" style="color: #667eea; margin-right: 15px;">Demo</a>
+              <a href="#" style="color: #667eea;">Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills section — fixed width container -->
+  <div id="skills">
+    <div class="SKILLS_BOX">
+      <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">Skills</div>
+      <div style="color: #888; margin-bottom: 30px;">What I know</div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <div style="width: 180px;">
+          <div style="font-weight: bold; margin-bottom: 10px;">Frontend</div>
+          <div style="color: #666; font-size: 14px;">HTML/CSS</div>
+          <div style="color: #666; font-size: 14px;">JavaScript</div>
+          <div style="color: #666; font-size: 14px;">React</div>
+          <div style="color: #666; font-size: 14px;">Vue</div>
+        </div>
+        <div style="width: 180px;">
+          <div style="font-weight: bold; margin-bottom: 10px;">Backend</div>
+          <div style="color: #666; font-size: 14px;">Node.js</div>
+          <div style="color: #666; font-size: 14px;">Python</div>
+          <div style="color: #666; font-size: 14px;">SQL</div>
+          <div style="color: #666; font-size: 14px;">MongoDB</div>
+        </div>
+        <div style="width: 180px;">
+          <div style="font-weight: bold; margin-bottom: 10px;">Tools</div>
+          <div style="color: #666; font-size: 14px;">Git</div>
+          <div style="color: #666; font-size: 14px;">Docker</div>
+          <div style="color: #666; font-size: 14px;">AWS</div>
+          <div style="color: #666; font-size: 14px;">Linux</div>
+        </div>
+        <div style="width: 180px;">
+          <div style="font-weight: bold; margin-bottom: 10px;">Design</div>
+          <div style="color: #666; font-size: 14px;">Figma</div>
+          <div style="color: #666; font-size: 14px;">Photoshop</div>
+          <!-- Poor contrast -->
+          <div style="color: #ddd; font-size: 14px;">Responsive</div>
+          <div style="color: #666; font-size: 14px;">UI/UX</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact section — no form labels, no validation -->
+  <div id="contact" style="width: 800px; margin: 0 auto; padding: 60px 0;">
+    <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">Contact</div>
+    <div style="color: #888; margin-bottom: 30px;">Get in touch</div>
+
+    <div style="display: flex; gap: 40px;">
+      <div style="width: 350px;">
+        <div style="color: #666; margin-bottom: 20px;">Feel free to reach out if you want to work together or just chat!</div>
+        <div style="margin-bottom: 10px;">📧 jordan@example.com</div>
+        <div style="margin-bottom: 10px;">📍 Chicago, IL</div>
+        <div>💼 LinkedIn</div>
+      </div>
+
+      <!-- Form with no labels, no required attributes, no validation -->
+      <div style="width: 400px;">
+        <form id="contactForm">
+          <input type="text" placeholder="Name" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+          <input type="text" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+          <textarea placeholder="Message" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; height: 120px; resize: none;"></textarea>
+          <button type="submit" class="myButton" style="width: 100%; border-radius: 5px;">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer — minimal, not semantic -->
+  <div style="background: #333; color: white; text-align: center; padding: 20px;">
+    <div>© 2025 Jordan. All rights reserved.</div>
+    <div style="margin-top: 10px;">
+      <a href="#" style="color: #999; margin: 0 10px;">GitHub</a>
+      <a href="#" style="color: #999; margin: 0 10px;">LinkedIn</a>
+      <a href="#" style="color: #999; margin: 0 10px;">Twitter</a>
+    </div>
+  </div>
+
+  <script>
+    // Uses var instead of const/let — outdated practice
+    var form = document.getElementById("contactForm");
+
+    // No error handling, no validation
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      // Gets inputs by index — fragile and unclear
+      var name = form.getElementsByTagName("input")[0].value;
+      var email = form.getElementsByTagName("input")[1].value;
+      var message = form.getElementsByTagName("textarea")[0].value;
+
+      // No email validation, no empty field checks
+      if (name != "" && email != "" && message != "") {
+        alert("Thanks " + name + "! Message sent.");
+        form.reset();
+      } else {
+        alert("Please fill in all fields");
+      }
+    }
+
+    // Smooth scroll — works but uses outdated patterns
+    var links = document.querySelectorAll('a[href^="#"]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].onclick = function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          // scrollIntoView is fine, but the overall JS style is inconsistent
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

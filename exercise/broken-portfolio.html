@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        CSC 436 — Web Applications — DePaul University
+        Week 1 In-Class Exercise: Broken Portfolio
+
+        This portfolio page contains 3 intentional bugs for students to find and fix.
+        The page should otherwise function as a decent-looking personal portfolio.
+        Do NOT peek at the solution — use DevTools, AI tools, and your own
+        debugging skills to track them down.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan Rivera — Portfolio</title>
+    <style>
+        /* ===== Reset & Base ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background-color: #0f1117;
+        }
+
+        a {
+            color: #64b5f6;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #90caf9;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== Navigation ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1e2130;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #b0b8c8;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #64b5f6;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #0f1117 0%, #1a1d2e 50%, #0f1117 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content h1 span {
+            color: #64b5f6;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.35rem;
+            color: #8892a8;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(100, 181, 246, 0.3);
+        }
+
+        .btn-primary {
+            background: #64b5f6;
+            color: #0f1117;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #64b5f6;
+            border: 2px solid #64b5f6;
+        }
+
+        /* ===== Section Shared ===== */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #8892a8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== About Section ===== */
+        .about {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 3px solid #1e2130;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #b0b8c8;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-tag {
+            background: #1e2130;
+            color: #64b5f6;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== Projects Section ===== */
+        .projects {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 340px 340px 340px;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .project-card {
+            background: #181b28;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #1e2130;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: #64b5f6;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: #8892a8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-tags span {
+            background: #0f1117;
+            color: #64b5f6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: #181b28;
+            border: 1px solid #1e2130;
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            color: #e0e0e0;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #64b5f6;
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-status {
+            text-align: center;
+            font-size: 0.95rem;
+            min-height: 1.5rem;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #1e2130;
+            color: #5a6278;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #8892a8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">JR</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Jordan Rivera</span></h1>
+            <p class="tagline">Full-stack developer &amp; CS student at DePaul University</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="about">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-subtitle">A little background on who I am</p>
+            <div class="about-grid">
+                <img
+                    src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=400&h=400&fit=crop"
+                    alt="photo"
+                    class="about-image"
+                >
+                <div class="about-text">
+                    <p>
+                        I'm a junior studying Computer Science at DePaul University with a focus on
+                        web development and human-computer interaction. I love building things that
+                        live on the internet and exploring how design and technology intersect.
+                    </p>
+                    <p>
+                        When I'm not coding, you'll find me exploring Chicago's coffee shops,
+                        contributing to open-source projects, or experimenting with new frameworks.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">Git</span>
+                        <span class="tech-tag">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+        <div class="projects">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">Some things I've built recently</p>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop"
+                        alt="image"
+                    >
+                    <div class="project-info">
+                        <h3>DevTracker</h3>
+                        <p>A project management dashboard for small dev teams with real-time updates and Kanban boards.</p>
+                        <div class="project-tags">
+                            <span>React</span>
+                            <span>Firebase</span>
+                            <span>Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=600&h=400&fit=crop"
+                        alt="image"
+                    >
+                    <div class="project-info">
+                        <h3>CTA Pulse</h3>
+                        <p>Real-time Chicago transit tracker showing train arrivals, service alerts, and route planning.</p>
+                        <div class="project-tags">
+                            <span>Node.js</span>
+                            <span>Express</span>
+                            <span>CTA API</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop"
+                        alt="image"
+                    >
+                    <div class="project-info">
+                        <h3>MarkdownLive</h3>
+                        <p>A collaborative markdown editor with live preview, syntax highlighting, and export options.</p>
+                        <div class="project-tags">
+                            <span>JavaScript</span>
+                            <span>WebSockets</span>
+                            <span>CodeMirror</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Have a question or want to collaborate? Drop me a message.</p>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                <p class="form-status" id="formStatus"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Jordan Rivera. Built with curiosity and too much coffee.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://github.com" target="_blank">GitHub</a> &middot;
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a> &middot;
+            <a href="mailto:jrivera@example.com">Email</a>
+        </p>
+    </footer>
+
+    <script>
+        // ===== Smooth scroll for nav links =====
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ===== Active nav highlight on scroll =====
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (link) {
+                    if (scrollY >= top && scrollY < top + height) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // ===== Contact form handling =====
+        const form = document.querySelector('#contact-form');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.querySelector('#name').value.trim();
+            const email = document.querySelector('#email').value.trim();
+            const message = document.querySelector('#message').value.trim();
+
+            if (!name || !email || !message) {
+                showStatus('Please fill in all fields.', '#ef5350');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showStatus('Please enter a valid email address.', '#ef5350');
+                return;
+            }
+
+            // Simulate sending
+            showStatus('Sending...', '#64b5f6');
+            setTimeout(() => {
+                showStatus('Message sent! I\'ll get back to you soon.', '#66bb6a');
+                form.reset();
+            }, 1500);
+        });
+
+        function showStatus(msg, color) {
+            const status = document.getElementById('formStatus');
+            status.textContent = msg;
+            status.style.color = color;
+        }
+    </script>
+
+</body>
+</html>

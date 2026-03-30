@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1: AI-Assisted Web Development Foundations — CSC 436</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+<style>
+  :root {
+    --r-background-color: #1a1a2e;
+    --r-main-color: #e0e0e0;
+    --r-heading-color: #64ffda;
+    --r-link-color: #82b1ff;
+    --r-link-color-hover: #b388ff;
+    --r-selection-background-color: #7c4dff;
+    --r-heading-font: 'Segoe UI', system-ui, sans-serif;
+    --r-main-font: 'Segoe UI', system-ui, sans-serif;
+    --r-code-font: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  }
+
+  .reveal {
+    font-size: 32px;
+  }
+
+  .reveal h1 { font-size: 2.2em; font-weight: 700; }
+  .reveal h2 { font-size: 1.6em; font-weight: 600; }
+  .reveal h3 { font-size: 1.2em; font-weight: 600; color: #b388ff; }
+
+  .reveal pre {
+    width: 95%;
+    font-size: 0.55em;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+
+  .reveal code {
+    font-family: var(--r-code-font);
+  }
+
+  .reveal .highlight-green { color: #69f0ae; }
+  .reveal .highlight-red { color: #ff5252; }
+  .reveal .highlight-blue { color: #82b1ff; }
+  .reveal .highlight-yellow { color: #ffd740; }
+  .reveal .highlight-purple { color: #b388ff; }
+  .reveal .highlight-cyan { color: #64ffda; }
+
+  .reveal .subtitle {
+    font-size: 0.7em;
+    color: #aaa;
+    margin-top: 0.3em;
+  }
+
+  .reveal .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    text-align: left;
+    font-size: 0.85em;
+  }
+
+  .reveal .two-column-narrow {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 2em;
+    text-align: left;
+    font-size: 0.85em;
+  }
+
+  .reveal ul {
+    font-size: 0.9em;
+  }
+
+  .reveal .small {
+    font-size: 0.65em;
+    color: #999;
+  }
+
+  .reveal .emoji-large {
+    font-size: 1.5em;
+  }
+
+  .reveal .box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(100,255,218,0.2);
+    border-radius: 12px;
+    padding: 1em 1.5em;
+    margin: 0.5em 0;
+  }
+
+  .reveal .box-warn {
+    background: rgba(255,82,82,0.08);
+    border: 1px solid rgba(255,82,82,0.3);
+    border-radius: 12px;
+    padding: 1em 1.5em;
+    margin: 0.5em 0;
+  }
+
+  .reveal .box-good {
+    background: rgba(105,240,174,0.08);
+    border: 1px solid rgba(105,240,174,0.3);
+    border-radius: 12px;
+    padding: 1em 1.5em;
+    margin: 0.5em 0;
+  }
+
+  .reveal .workflow-step {
+    display: inline-block;
+    background: rgba(100,255,218,0.1);
+    border: 1px solid rgba(100,255,218,0.3);
+    border-radius: 8px;
+    padding: 0.4em 0.8em;
+    margin: 0.2em;
+    font-size: 0.85em;
+  }
+
+  .reveal .workflow-arrow {
+    display: inline-block;
+    color: #64ffda;
+    font-size: 1.2em;
+    margin: 0 0.1em;
+    vertical-align: middle;
+  }
+
+  .reveal blockquote {
+    background: rgba(130,177,255,0.08);
+    border-left: 4px solid #82b1ff;
+    padding: 0.8em 1.2em;
+    font-style: italic;
+    width: 85%;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .reveal .slide-number {
+    font-size: 12px;
+    color: #555;
+  }
+
+  .reveal table {
+    font-size: 0.75em;
+    border-collapse: collapse;
+  }
+  .reveal table th {
+    background: rgba(100,255,218,0.15);
+    color: #64ffda;
+    padding: 0.5em 1em;
+  }
+  .reveal table td {
+    padding: 0.4em 1em;
+    border-bottom: 1px solid #333;
+  }
+
+  .fragment.current-visible.visible:not(.current-fragment) {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- TITLE SLIDE -->
+<!-- ============================================================ -->
+<section>
+  <h1 style="font-size:1.8em;">CSC 436: Web Applications</h1>
+  <h3 style="color:#64ffda; margin-top:0.5em;">Week 1: AI-Assisted Web Development Foundations</h3>
+  <p class="subtitle" style="font-size:0.6em; margin-top:1.5em;">
+    DePaul University · College of Computing and Digital Media<br>
+    Monday Evenings, 5:45–9:00 PM · 10-Week Quarter
+  </p>
+  <aside class="notes">
+    Welcome everyone to CSC 436. This is not your traditional web development course.
+    We've redesigned it around AI-assisted development — the way software is increasingly
+    built in industry. Tonight we'll cover the philosophy, the tools, and get our
+    environment set up.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- AGENDA -->
+<!-- ============================================================ -->
+<section>
+  <h2>Tonight's Agenda</h2>
+  <ol style="font-size:0.8em;">
+    <li>Course Philosophy &amp; Why AI-Assisted Development</li>
+    <li>The AI-Assisted Development Workflow</li>
+    <li>Environment Setup: VS Code, Copilot, Node.js, Git</li>
+    <li><em style="color:#999;">— Break —</em></li>
+    <li>HTML / CSS / JavaScript Refresher (with AI)</li>
+    <li>Prompt Engineering Fundamentals</li>
+    <li>What AI Gets Right vs. Wrong</li>
+    <li>Live Demo: AI-Generated vs. Hand-Written Code</li>
+    <li>Tips &amp; Best Practices</li>
+  </ol>
+  <aside class="notes">
+    Here's our roadmap for tonight. We'll take a break roughly halfway through.
+    The second half is more hands-on. By the end of tonight you should have a
+    working dev environment and your first AI-assisted webpage.
+  </aside>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: COURSE PHILOSOPHY -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 1</h2>
+    <h3 style="color:#64ffda;">Course Philosophy</h3>
+    <p class="subtitle">Why AI-Assisted Development?</p>
+  </section>
+
+  <section>
+    <h2>The World Has Changed 🌍</h2>
+    <div class="two-column">
+      <div>
+        <h3>Before (2022)</h3>
+        <ul>
+          <li>Memorize syntax</li>
+          <li>Write every line by hand</li>
+          <li>Google + Stack Overflow</li>
+          <li>Copy-paste-adapt</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Now (2025)</h3>
+        <ul>
+          <li>Understand concepts</li>
+          <li>Direct AI to generate code</li>
+          <li>AI + documentation</li>
+          <li>Prompt-generate-evaluate</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      The fundamental skill set for developers has shifted. You still need to understand
+      what code does, but HOW you produce it has changed dramatically. This course
+      embraces that shift rather than pretending it hasn't happened.
+    </aside>
+  </section>
+
+  <section>
+    <h2>🤝 AI as Your Pair Programmer</h2>
+    <blockquote>
+      "AI doesn't replace the developer — it replaces the blank page."
+    </blockquote>
+    <ul style="margin-top:1em; font-size:0.85em;">
+      <li><strong>You</strong> define the architecture and requirements</li>
+      <li><strong>AI</strong> generates boilerplate and suggests implementations</li>
+      <li><strong>You</strong> evaluate, debug, and make final decisions</li>
+      <li><strong>AI</strong> helps you iterate faster</li>
+    </ul>
+    <aside class="notes">
+      Think of AI as a very fast but sometimes unreliable junior developer.
+      It can produce code quickly, but you are the senior engineer who reviews,
+      understands, and takes responsibility for what ships.
+    </aside>
+  </section>
+
+  <section>
+    <h2>You Still Need to Understand</h2>
+    <div class="box-warn">
+      <p style="font-size:0.85em;">⚠️ If you can't evaluate AI output, you can't use AI effectively.</p>
+    </div>
+    <ul style="font-size:0.85em; margin-top:0.8em;">
+      <li>AI generates <em>plausible</em> code — not always <em>correct</em> code</li>
+      <li>You must recognize bugs, security holes, and bad patterns</li>
+      <li>Understanding fundamentals makes you a better prompter</li>
+      <li>Debugging requires knowing how things actually work</li>
+    </ul>
+    <aside class="notes">
+      This is the most important slide of the night. We are NOT teaching you to blindly
+      accept AI output. We are teaching you to be an effective AI-augmented developer.
+      That requires understanding HTML, CSS, JavaScript, HTTP, and system design.
+    </aside>
+  </section>
+
+  <section>
+    <h2>What You Already Know</h2>
+    <p style="font-size:0.85em;">From your prerequisites:</p>
+    <div class="two-column" style="font-size:0.9em;">
+      <div>
+        <h3>CSC 447</h3>
+        <ul>
+          <li>Multiple programming paradigms</li>
+          <li>Functional programming concepts</li>
+          <li>Type systems</li>
+          <li>Language design tradeoffs</li>
+        </ul>
+      </div>
+      <div>
+        <h3>CSC 435</h3>
+        <ul>
+          <li>Client-server architecture</li>
+          <li>Network protocols</li>
+          <li>Concurrency</li>
+          <li>Distributed system patterns</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:0.75em; margin-top:1em; color:#999;">
+      Web dev builds directly on these foundations. You're more prepared than you think.
+    </p>
+    <aside class="notes">
+      You already understand paradigms, type systems, client-server architecture, and
+      networking. Web development is an application of all of these. JavaScript borrows
+      from functional programming, HTTP is client-server, and modern web apps are
+      distributed systems.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Course Approach</h2>
+    <table>
+      <tr>
+        <th>Traditional Course</th>
+        <th>This Course</th>
+      </tr>
+      <tr>
+        <td>Teach syntax first</td>
+        <td>Teach concepts first, AI generates syntax</td>
+      </tr>
+      <tr>
+        <td>Manually type every line</td>
+        <td>Generate, then understand and modify</td>
+      </tr>
+      <tr>
+        <td>Build small exercises</td>
+        <td>Build real features faster</td>
+      </tr>
+      <tr>
+        <td>Penalize using AI</td>
+        <td>Require and assess AI usage</td>
+      </tr>
+      <tr>
+        <td>Focus on memorization</td>
+        <td>Focus on evaluation and architecture</td>
+      </tr>
+    </table>
+    <aside class="notes">
+      We will grade you on how well you use AI, how well you evaluate its output,
+      and whether your final product works correctly and is well-architected.
+      Using AI is not cheating — it's the assignment.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: THE WORKFLOW -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 2</h2>
+    <h3 style="color:#64ffda;">The AI-Assisted Development Workflow</h3>
+  </section>
+
+  <section>
+    <h2>The Core Loop 🔄</h2>
+    <div style="margin: 1.5em 0;">
+      <span class="workflow-step">1. Prompt</span>
+      <span class="workflow-arrow">→</span>
+      <span class="workflow-step">2. Generate</span>
+      <span class="workflow-arrow">→</span>
+      <span class="workflow-step">3. Evaluate</span>
+      <span class="workflow-arrow">→</span>
+      <span class="workflow-step">4. Debug</span>
+      <span class="workflow-arrow">→</span>
+      <span class="workflow-step">5. Iterate</span>
+    </div>
+    <p style="font-size:0.75em; color:#999; margin-top:1em;">
+      This cycle typically takes 2–5 minutes per feature, not hours.
+    </p>
+    <aside class="notes">
+      This five-step loop is the heartbeat of AI-assisted development. You'll internalize
+      this over the quarter. Each step requires different skills — prompting is about
+      communication, evaluation is about engineering judgment.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Step 1: Prompt ✍️</h2>
+    <div class="box">
+      <p style="font-size:0.8em;">Clearly describe what you want the AI to produce.</p>
+    </div>
+    <ul style="font-size:0.8em;">
+      <li><strong>Be specific</strong> — language, framework, constraints</li>
+      <li><strong>Provide context</strong> — what exists already, what it connects to</li>
+      <li><strong>State the goal</strong> — not just what, but <em>why</em></li>
+    </ul>
+    <pre><code class="language-text" data-trim>
+Create a responsive navigation bar using HTML and CSS.
+It should have a logo on the left, 4 nav links on the right,
+and collapse into a hamburger menu on mobile (< 768px).
+Use flexbox, no JavaScript needed for now.
+    </code></pre>
+    <aside class="notes">
+      A good prompt is like a good user story. It includes context, constraints, and
+      acceptance criteria. We'll spend a whole section on prompt engineering later tonight.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Step 2: Generate ⚡</h2>
+    <p style="font-size:0.85em;">Let the AI produce code using your tool of choice:</p>
+    <div class="two-column" style="font-size:0.85em;">
+      <div>
+        <h3>Inline (Copilot)</h3>
+        <ul>
+          <li>Tab-completion in editor</li>
+          <li>Context from open files</li>
+          <li>Fast for small pieces</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Chat (Copilot / ChatGPT / Claude)</h3>
+        <ul>
+          <li>Conversational interaction</li>
+          <li>Longer code generation</li>
+          <li>Explanations included</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      You'll develop intuition for when to use inline completion vs. chat.
+      Inline is great for filling in function bodies. Chat is better when you
+      need a whole component or want to discuss architecture.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Step 3: Evaluate 🔍</h2>
+    <p style="font-size:0.85em;">The most critical skill in this course.</p>
+    <ul style="font-size:0.8em;">
+      <li>Does the code do what you asked?</li>
+      <li>Are there obvious bugs or edge cases?</li>
+      <li>Is it using best practices or outdated patterns?</li>
+      <li>Are there security vulnerabilities?</li>
+      <li>Is it readable and maintainable?</li>
+    </ul>
+    <div class="box-warn" style="margin-top:0.5em;">
+      <p style="font-size:0.75em;">🚨 Never deploy AI-generated code you don't understand.</p>
+    </div>
+    <aside class="notes">
+      This is where your CS fundamentals pay off. You need to read the code, trace the
+      logic, and identify problems. We'll practice this skill throughout the quarter.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Steps 4 &amp; 5: Debug &amp; Iterate 🐛🔁</h2>
+    <ul style="font-size:0.85em;">
+      <li><strong>Debug:</strong> Use browser dev tools, console.log, breakpoints</li>
+      <li><strong>Iterate:</strong> Refine your prompt with what you learned</li>
+    </ul>
+    <pre><code class="language-text" data-trim>
+# Iteration example:
+Round 1: "Create a login form"
+  → Too generic, missing validation
+
+Round 2: "Create a login form with email validation,
+  password minimum 8 chars, and error messages
+  displayed below each field in red"
+  → Much better output
+    </code></pre>
+    <aside class="notes">
+      Debugging AI code is just like debugging any code — except you can also ask the AI
+      to help you debug it. And iteration is key: your second prompt is almost always
+      better than your first.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: ENVIRONMENT SETUP -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 3</h2>
+    <h3 style="color:#64ffda;">Environment Setup</h3>
+    <p class="subtitle">Getting Your Tools Ready</p>
+  </section>
+
+  <section>
+    <h2>The Toolchain 🛠️</h2>
+    <table>
+      <tr><th>Tool</th><th>Purpose</th><th>Get It</th></tr>
+      <tr><td><strong>VS Code</strong></td><td>Code editor</td><td>code.visualstudio.com</td></tr>
+      <tr><td><strong>GitHub Copilot</strong></td><td>AI pair programmer</td><td>Free for students via GitHub Education</td></tr>
+      <tr><td><strong>Node.js (LTS)</strong></td><td>JavaScript runtime</td><td>nodejs.org</td></tr>
+      <tr><td><strong>Git</strong></td><td>Version control</td><td>git-scm.com</td></tr>
+      <tr><td><strong>Browser Dev Tools</strong></td><td>Debug &amp; inspect</td><td>Chrome / Edge / Firefox (F12)</td></tr>
+    </table>
+    <aside class="notes">
+      Let's make sure everyone has these installed. If you haven't already, start
+      downloading now — we'll walk through setup together. GitHub Copilot is free
+      with your DePaul .edu email through GitHub Education.
+    </aside>
+  </section>
+
+  <section>
+    <h2>VS Code + Copilot Setup</h2>
+    <ol style="font-size:0.8em;">
+      <li>Install VS Code from <span class="highlight-cyan">code.visualstudio.com</span></li>
+      <li>Sign up for <span class="highlight-cyan">GitHub Education</span> (use your @depaul.edu email)</li>
+      <li>Install the <strong>GitHub Copilot</strong> extension in VS Code</li>
+      <li>Sign in with your GitHub account</li>
+      <li>Verify: open a <code>.js</code> file and start typing — suggestions should appear</li>
+    </ol>
+    <div class="box" style="margin-top:0.8em;">
+      <p style="font-size:0.75em;">💡 Also install: <strong>GitHub Copilot Chat</strong>, <strong>Live Server</strong>, <strong>Prettier</strong>, <strong>ESLint</strong></p>
+    </div>
+    <aside class="notes">
+      GitHub Copilot is free for verified students. The Education verification
+      usually takes a day or two, so if you haven't done it yet, submit the
+      application tonight. In the meantime, you can use the free trial.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Node.js &amp; Git Verification</h2>
+    <pre><code class="language-bash" data-trim>
+# Check Node.js
+node --version
+# Should show v20.x.x or v22.x.x (LTS)
+
+npm --version
+# Should show 10.x.x
+
+# Check Git
+git --version
+# Should show 2.x.x
+
+# Configure Git (if first time)
+git config --global user.name "Your Name"
+git config --global user.email "you@depaul.edu"
+    </code></pre>
+    <aside class="notes">
+      Run these commands in your terminal. If any of them fail, we'll troubleshoot
+      during the break. We need Node for running JavaScript outside the browser
+      and for package management with npm.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Your First Project</h2>
+    <pre><code class="language-bash" data-trim>
+# Create a project directory
+mkdir course-week01
+cd course-week01
+
+# Initialize a new project
+npm init -y
+
+# Create your first file
+touch index.html
+
+# Open in VS Code
+code .
+    </code></pre>
+    <p style="font-size:0.75em; color:#999; margin-top:0.5em;">
+      We'll use this project for the rest of tonight's exercises.
+    </p>
+    <aside class="notes">
+      Everyone should do this now. We want a clean directory to work in.
+      The npm init creates a package.json which we'll need later for
+      installing dependencies.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: HTML/CSS/JS REFRESHER -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 4</h2>
+    <h3 style="color:#64ffda;">HTML / CSS / JavaScript Refresher</h3>
+    <p class="subtitle">The building blocks — now with AI assistance</p>
+  </section>
+
+  <section>
+    <h2>The Web Trinity</h2>
+    <div class="two-column" style="text-align:center;">
+      <div>
+        <p style="font-size:2em;">🏗️</p>
+        <h3>HTML</h3>
+        <p style="font-size:0.8em;">Structure &amp; content</p>
+        <p style="font-size:0.7em; color:#999;">The skeleton</p>
+      </div>
+      <div>
+        <p style="font-size:2em;">🎨</p>
+        <h3>CSS</h3>
+        <p style="font-size:0.8em;">Presentation &amp; layout</p>
+        <p style="font-size:0.7em; color:#999;">The skin &amp; clothes</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:1em;">
+      <p style="font-size:2em;">⚡</p>
+      <h3>JavaScript</h3>
+      <p style="font-size:0.8em;">Behavior &amp; interactivity</p>
+      <p style="font-size:0.7em; color:#999;">The muscles &amp; brain</p>
+    </div>
+    <aside class="notes">
+      Quick review of the three core web technologies. You may have encountered
+      these before. If not, that's fine — AI will help you write them, but you
+      need to understand what each one does.
+    </aside>
+  </section>
+
+  <section>
+    <h2>HTML Basics</h2>
+    <pre><code class="language-html" data-trim>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My First Page&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Hello, CSC 436!&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="#about"&gt;About&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main&gt;
+    &lt;p&gt;Welcome to AI-assisted web development.&lt;/p&gt;
+  &lt;/main&gt;
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <aside class="notes">
+      This is a standard HTML5 boilerplate. Point out semantic elements like header,
+      nav, main. The viewport meta tag is critical for responsive design.
+      AI can generate this in seconds — but you need to know what each part does.
+    </aside>
+  </section>
+
+  <section>
+    <h2>CSS Essentials</h2>
+    <pre><code class="language-css" data-trim>
+/* Modern CSS: variables, flexbox, responsive */
+:root {
+  --primary: #6200ea;
+  --text: #333;
+  --bg: #fafafa;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: var(--primary);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+  nav { flex-direction: column; }
+}
+    </code></pre>
+    <aside class="notes">
+      Key modern CSS concepts: custom properties (variables), flexbox for layout,
+      and media queries for responsive design. These are the patterns AI will
+      generate most often. Know what flexbox does and how media queries work.
+    </aside>
+  </section>
+
+  <section>
+    <h2>JavaScript in 60 Seconds</h2>
+    <pre><code class="language-javascript" data-trim>
+// Variables and modern syntax
+const API_URL = 'https://api.example.com/users';
+
+// Arrow functions
+const greet = (name) => `Hello, ${name}!`;
+
+// DOM manipulation
+const button = document.querySelector('#submit-btn');
+button.addEventListener('click', async () => {
+  try {
+    const response = await fetch(API_URL);
+    const users = await response.json();
+    renderUsers(users);
+  } catch (error) {
+    console.error('Failed to fetch users:', error);
+  }
+});
+
+// Array methods (from your functional programming class!)
+const activeUsers = users
+  .filter(u => u.isActive)
+  .map(u => u.name)
+  .sort();
+    </code></pre>
+    <aside class="notes">
+      Modern JavaScript should feel somewhat familiar from CSC 447. Arrow functions,
+      template literals, destructuring, async/await, and array methods like filter/map
+      are core patterns. Note async/await for HTTP requests — that connects back to
+      your distributed systems knowledge.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Let AI Generate It 🤖</h2>
+    <p style="font-size:0.85em;">Instead of writing from scratch, try this prompt:</p>
+    <div class="box" style="font-size:0.75em; text-align:left;">
+      <p><strong>Prompt:</strong> "Create an HTML page with a styled card component
+      that shows a user profile. Include a circular avatar image, name, title,
+      and a short bio. Use modern CSS with flexbox. Make it responsive. Add a
+      'Contact' button that shows an alert with the user's email when clicked."</p>
+    </div>
+    <p style="font-size:0.75em; margin-top:0.8em;">
+      AI generates all three layers (HTML + CSS + JS) in seconds.<br>
+      <span class="highlight-cyan">Your job:</span> evaluate whether it's correct, accessible, and well-structured.
+    </p>
+    <aside class="notes">
+      Let's try this together. Open Copilot Chat in VS Code or ChatGPT and paste
+      this prompt. Look at the output — does it use semantic HTML? Is the CSS
+      clean? Does the JavaScript have error handling?
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: PROMPT ENGINEERING -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 5</h2>
+    <h3 style="color:#64ffda;">Prompt Engineering Fundamentals</h3>
+    <p class="subtitle">Getting better output from AI</p>
+  </section>
+
+  <section>
+    <h2>The SPICE Framework 🌶️</h2>
+    <table>
+      <tr><th>Letter</th><th>Principle</th><th>Example</th></tr>
+      <tr>
+        <td class="highlight-cyan"><strong>S</strong></td>
+        <td>Specific</td>
+        <td>"Use flexbox" not "make it look nice"</td>
+      </tr>
+      <tr>
+        <td class="highlight-cyan"><strong>P</strong></td>
+        <td>Provide context</td>
+        <td>"This is a React 18 component in a Next.js app"</td>
+      </tr>
+      <tr>
+        <td class="highlight-cyan"><strong>I</strong></td>
+        <td>Include constraints</td>
+        <td>"No external dependencies, ES modules only"</td>
+      </tr>
+      <tr>
+        <td class="highlight-cyan"><strong>C</strong></td>
+        <td>Clarify output format</td>
+        <td>"Return only the function, no explanation"</td>
+      </tr>
+      <tr>
+        <td class="highlight-cyan"><strong>E</strong></td>
+        <td>Examples / Edge cases</td>
+        <td>"Handle empty arrays and null inputs"</td>
+      </tr>
+    </table>
+    <aside class="notes">
+      SPICE is a mnemonic I use for teaching prompt engineering. Each letter
+      represents a dimension you can improve in your prompts. We'll see examples
+      of each.
+    </aside>
+  </section>
+
+  <section>
+    <h2>❌ Bad Prompt vs. ✅ Good Prompt</h2>
+    <div class="box-warn" style="font-size:0.75em; text-align:left;">
+      <p><strong>❌ Bad:</strong> "Make me a form"</p>
+    </div>
+    <div class="box-good" style="font-size:0.75em; text-align:left; margin-top:0.5em;">
+      <p><strong>✅ Good:</strong> "Create an HTML registration form with the following fields:
+      full name (text, required), email (email type, required), password (min 8 chars, required),
+      and a 'Sign Up' submit button. Use semantic HTML5 form elements. Style it with CSS — centered on
+      the page, max-width 400px, with a card-like shadow. Add client-side validation that displays
+      error messages below each field in red. Use vanilla JavaScript, no frameworks."</p>
+    </div>
+    <aside class="notes">
+      The difference is night and day. The bad prompt gives the AI no constraints,
+      so it guesses at everything. The good prompt specifies fields, validation rules,
+      styling approach, and technology constraints. Better input = better output.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Context Is King 👑</h2>
+    <p style="font-size:0.85em;">Always tell the AI about your environment:</p>
+    <pre><code class="language-text" data-trim>
+# Include in your prompts:
+
+"I'm building a Node.js Express API (v4.18) with
+MongoDB using Mongoose. The app uses ES modules
+(import/export syntax). I need to create a new
+route for user authentication that..."
+
+# vs.
+
+"Create a login endpoint"
+    </code></pre>
+    <p style="font-size:0.75em; margin-top:0.5em;">
+      <span class="highlight-cyan">Pro tip:</span> In Copilot, open related files in your editor —
+      Copilot reads your open tabs for context.
+    </p>
+    <aside class="notes">
+      GitHub Copilot automatically uses your open files as context. But for ChatGPT
+      and Claude, you need to provide context manually. The more specific your context,
+      the more accurate the output.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Iterative Refinement 🔄</h2>
+    <p style="font-size:0.85em;">Your first prompt is rarely your best. Iterate:</p>
+    <div style="font-size:0.75em; text-align:left;">
+      <div class="box" style="margin-bottom:0.3em;">
+        <strong>Round 1:</strong> "Create a todo list app"<br>
+        <em style="color:#999;">→ Gets basic structure, but no persistence</em>
+      </div>
+      <div class="box" style="margin-bottom:0.3em;">
+        <strong>Round 2:</strong> "Add localStorage persistence so todos survive page refresh"<br>
+        <em style="color:#999;">→ Better, but no delete or edit functionality</em>
+      </div>
+      <div class="box" style="margin-bottom:0.3em;">
+        <strong>Round 3:</strong> "Add ability to delete todos and mark them complete with a strikethrough"<br>
+        <em style="color:#999;">→ Feature-complete</em>
+      </div>
+      <div class="box">
+        <strong>Round 4:</strong> "Refactor to use event delegation and add CSS transitions for adding/removing"<br>
+        <em style="color:#999;">→ Polished</em>
+      </div>
+    </div>
+    <aside class="notes">
+      Building iteratively is natural with AI. Each round adds a layer.
+      This mirrors real development — start simple, add complexity.
+      The AI maintains context within a conversation, so each round builds on the last.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Prompt Patterns for Code</h2>
+    <ul style="font-size:0.8em;">
+      <li><strong>Generate:</strong> "Create a [component] that [does X] using [technology]"</li>
+      <li><strong>Explain:</strong> "Explain this code line by line: [paste code]"</li>
+      <li><strong>Debug:</strong> "This code throws [error]. Here's the code: [paste]. Fix it."</li>
+      <li><strong>Refactor:</strong> "Refactor this to use [pattern/approach]: [paste code]"</li>
+      <li><strong>Convert:</strong> "Convert this from [X] to [Y]: [paste code]"</li>
+      <li><strong>Test:</strong> "Write unit tests for this function using [framework]"</li>
+      <li><strong>Review:</strong> "Review this code for bugs, security issues, and best practices"</li>
+    </ul>
+    <aside class="notes">
+      These are your go-to prompt templates. Memorize these patterns and you'll
+      cover 90% of your AI interactions. We'll practice all of these throughout
+      the quarter.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: WHAT AI GETS RIGHT VS. WRONG -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 6</h2>
+    <h3 style="color:#64ffda;">What AI Gets Right vs. Wrong</h3>
+    <p class="subtitle">Developing your evaluation instincts</p>
+  </section>
+
+  <section>
+    <h2>✅ What AI Is Great At</h2>
+    <ul style="font-size:0.85em;">
+      <li><strong>Boilerplate code</strong> — HTML templates, config files, setup</li>
+      <li><strong>Common patterns</strong> — CRUD operations, form validation, API calls</li>
+      <li><strong>Syntax translation</strong> — "How do I do X in JavaScript?"</li>
+      <li><strong>Documentation</strong> — JSDoc comments, README files</li>
+      <li><strong>CSS styling</strong> — layouts, animations, responsive design</li>
+      <li><strong>Regex patterns</strong> — email validation, parsing</li>
+      <li><strong>Standard algorithms</strong> — sorting, searching, traversal</li>
+    </ul>
+    <aside class="notes">
+      AI excels at well-trodden paths. If thousands of developers have written
+      similar code before, AI has seen it in training data and can reproduce
+      high-quality versions.
+    </aside>
+  </section>
+
+  <section>
+    <h2>⚠️ Where AI Struggles</h2>
+    <ul style="font-size:0.85em;">
+      <li><strong>Business logic</strong> — your specific domain rules</li>
+      <li><strong>Security</strong> — may generate vulnerable code (SQL injection, XSS)</li>
+      <li><strong>State management</strong> — complex app state, race conditions</li>
+      <li><strong>Up-to-date APIs</strong> — may use deprecated methods</li>
+      <li><strong>Architecture decisions</strong> — when to use what pattern</li>
+      <li><strong>Performance optimization</strong> — generates working but not optimal code</li>
+      <li><strong>Edge cases</strong> — often ignores error handling</li>
+    </ul>
+    <aside class="notes">
+      These are the areas where YOUR engineering judgment matters most. AI doesn't
+      know your business requirements, your threat model, or your performance
+      constraints. This is where you earn your salary as a developer.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Real Example: Spot the Bug 🐛</h2>
+    <p style="font-size:0.75em; color:#999;">AI-generated code for "fetch user data and display it":</p>
+    <pre><code class="language-javascript" data-trim>
+// AI generated this — can you spot the issues?
+async function loadUser(userId) {
+  const response = await fetch(`/api/users/${userId}`);
+  const user = await response.json();
+
+  document.getElementById('name').innerText = user.name;
+  document.getElementById('email').innerText = user.email;
+  document.getElementById('bio').innerHTML = user.bio;
+}
+
+loadUser(window.location.search.split('=')[1]);
+    </code></pre>
+    <div class="fragment" style="font-size:0.7em; text-align:left; margin-top:0.5em;">
+      <p class="highlight-red"><strong>Issues:</strong></p>
+      <ul>
+        <li>No check for <code>response.ok</code> — fails silently on 404/500</li>
+        <li><code>.innerHTML</code> with user data = <strong>XSS vulnerability</strong></li>
+        <li>URL parsing is fragile — use <code>URLSearchParams</code></li>
+        <li>No null checks — crashes if elements don't exist</li>
+        <li>No loading or error state for the user</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      Walk through each issue. The XSS vulnerability is the most critical — if user.bio
+      contains a script tag, it will execute. This is a real security hole that AI
+      generates frequently. The fix is to use textContent instead of innerHTML,
+      or sanitize the input.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The Fixed Version ✅</h2>
+    <pre><code class="language-javascript" data-trim>
+async function loadUser(userId) {
+  if (!userId) {
+    showError('No user ID provided');
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/users/${encodeURIComponent(userId)}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const user = await response.json();
+
+    // textContent is safe from XSS (unlike innerHTML)
+    document.getElementById('name').textContent = user.name ?? 'Unknown';
+    document.getElementById('email').textContent = user.email ?? '';
+    document.getElementById('bio').textContent = user.bio ?? '';
+  } catch (error) {
+    console.error('Failed to load user:', error);
+    showError('Could not load user profile. Please try again.');
+  }
+}
+
+const params = new URLSearchParams(window.location.search);
+loadUser(params.get('id'));
+    </code></pre>
+    <aside class="notes">
+      Compare this with the previous version. Every issue is addressed: error handling,
+      XSS prevention with textContent, proper URL parsing, null coalescing, and
+      user-facing error messages. This is what evaluation and debugging look like.
+    </aside>
+  </section>
+
+  <section>
+    <h2>AI Confidence ≠ Correctness</h2>
+    <div class="box-warn">
+      <p style="font-size:0.85em;">AI presents all code with equal confidence.<br>
+      It won't tell you "I'm not sure about this part."</p>
+    </div>
+    <ul style="font-size:0.8em; margin-top:0.8em;">
+      <li>AI-generated code that <em>looks</em> right can have subtle bugs</li>
+      <li>AI may "hallucinate" API methods that don't exist</li>
+      <li>AI may mix patterns from different framework versions</li>
+      <li>Always <strong>run</strong> the code and <strong>test</strong> edge cases</li>
+    </ul>
+    <aside class="notes">
+      This is a crucial mental model. Unlike a human colleague who might say
+      "I think this is right but you should double-check," AI presents everything
+      with the same tone of certainty. You must be the skeptic.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: LIVE DEMO -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 7</h2>
+    <h3 style="color:#64ffda;">Live Demo</h3>
+    <p class="subtitle">AI-Generated vs. Hand-Written Code</p>
+  </section>
+
+  <section>
+    <h2>The Challenge 🏁</h2>
+    <div class="box">
+      <p style="font-size:0.85em;">Build a <strong>weather dashboard card</strong> that:</p>
+      <ul style="font-size:0.8em;">
+        <li>Displays city name, temperature, and conditions</li>
+        <li>Has an icon representing the weather</li>
+        <li>Shows a "last updated" timestamp</li>
+        <li>Has a refresh button</li>
+        <li>Is responsive and visually appealing</li>
+      </ul>
+    </div>
+    <div class="two-column" style="margin-top:1em; text-align:center;">
+      <div>
+        <h3>🤖 AI Approach</h3>
+        <p style="font-size:0.8em;">One prompt, ~30 seconds</p>
+      </div>
+      <div>
+        <h3>⌨️ Manual Approach</h3>
+        <p style="font-size:0.8em;">From scratch, ~15 minutes</p>
+      </div>
+    </div>
+    <aside class="notes">
+      Live demo time. I'm going to build this both ways — first with AI, then
+      manually. We'll compare the results. The AI version will be faster but
+      may need fixes. Open VS Code and follow along.
+    </aside>
+  </section>
+
+  <section>
+    <h2>The AI Prompt</h2>
+    <div class="box" style="font-size:0.7em; text-align:left;">
+      <p><strong>Prompt for Copilot Chat:</strong></p>
+      <p>"Create a self-contained HTML file with a weather dashboard card.
+      Use mock data (Chicago, 72°F, Partly Cloudy). Include:</p>
+      <ul>
+        <li>A card with rounded corners and a subtle shadow</li>
+        <li>City name as the header, large temperature display</li>
+        <li>A weather emoji based on conditions</li>
+        <li>A 'Last updated' timestamp using JavaScript</li>
+        <li>A refresh button that updates the timestamp</li>
+        <li>Dark theme, modern CSS with custom properties</li>
+        <li>Responsive — looks good from 320px to 1200px</li>
+      </ul>
+      <p>Use vanilla HTML/CSS/JavaScript, no frameworks."</p>
+    </div>
+    <aside class="notes">
+      Notice how specific this prompt is. It includes visual details, technology
+      constraints, and mock data. Let's paste this in and see what we get.
+      [Live demo: paste prompt, review output, identify issues, iterate]
+    </aside>
+  </section>
+
+  <section>
+    <h2>Demo Takeaways 📝</h2>
+    <ul style="font-size:0.85em;">
+      <li>AI gets you <strong>80% of the way in 10% of the time</strong></li>
+      <li>The remaining 20% requires your engineering skills</li>
+      <li>Specificity in prompts directly correlates with output quality</li>
+      <li>AI code often needs: error handling, accessibility, edge cases</li>
+      <li>Manual coding builds deeper understanding (still valuable!)</li>
+    </ul>
+    <div class="box" style="margin-top:0.5em;">
+      <p style="font-size:0.75em;">💡 <strong>The sweet spot:</strong> Use AI to generate the foundation,
+      then manually refine and add the details that matter.</p>
+    </div>
+    <aside class="notes">
+      The 80/20 rule applies perfectly here. AI handles the commodity work,
+      you handle the craft. Both skills matter. Throughout this course,
+      we'll practice finding that sweet spot.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: TIPS AND BEST PRACTICES -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 8</h2>
+    <h3 style="color:#64ffda;">Tips for Effective AI Prompting</h3>
+    <p class="subtitle">Level up your AI collaboration</p>
+  </section>
+
+  <section>
+    <h2>Tip 1: Start with Structure 🏗️</h2>
+    <p style="font-size:0.85em;">Ask for the skeleton first, then flesh it out.</p>
+    <pre><code class="language-text" data-trim>
+# Step 1: Get the architecture
+"Outline the file structure for a Node.js Express
+REST API with user authentication and a MongoDB
+database. Just the file/folder names, no code yet."
+
+# Step 2: Generate file by file
+"Now create the server.js entry point based on
+that structure."
+
+# Step 3: Fill in details
+"Now create the User model in models/User.js
+using Mongoose with email, password (hashed),
+and createdAt fields."
+    </code></pre>
+    <aside class="notes">
+      Don't ask AI to generate an entire application at once. Break it into
+      layers: structure first, then individual files, then details. This gives
+      you more control and makes evaluation easier.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Tip 2: Show, Don't Just Tell 📋</h2>
+    <p style="font-size:0.85em;">Include examples of input/output in your prompts:</p>
+    <pre><code class="language-text" data-trim>
+"Write a function called formatCurrency that:
+- Takes a number and a locale string
+- Returns a formatted currency string
+
+Examples:
+  formatCurrency(1234.5, 'en-US')  → '$1,234.50'
+  formatCurrency(1234.5, 'de-DE')  → '1.234,50 €'
+  formatCurrency(0, 'en-US')       → '$0.00'
+  formatCurrency(-50, 'en-US')     → '-$50.00'"
+    </code></pre>
+    <p style="font-size:0.75em; color:#999;">Examples act as implicit test cases.</p>
+    <aside class="notes">
+      Examples are incredibly powerful. They remove ambiguity and give the AI
+      concrete test cases to satisfy. If the generated code doesn't match your
+      examples, you immediately know something is wrong.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Tip 3: Use AI to Learn 📚</h2>
+    <p style="font-size:0.85em;">AI is an excellent tutor — use it to understand code:</p>
+    <div class="two-column" style="font-size:0.8em;">
+      <div>
+        <h3>Ask for Explanations</h3>
+        <ul>
+          <li>"Explain this regex"</li>
+          <li>"What does this CSS selector do?"</li>
+          <li>"Walk me through this async code"</li>
+          <li>"Why is this approach better?"</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ask for Alternatives</h3>
+        <ul>
+          <li>"Show me 3 ways to do this"</li>
+          <li>"What are the tradeoffs?"</li>
+          <li>"How would a senior dev write this?"</li>
+          <li>"What's the modern approach?"</li>
+        </ul>
+      </div>
+    </div>
+    <aside class="notes">
+      Don't just use AI to write code — use it to learn. Ask why. Ask for
+      alternatives. Ask for tradeoffs. This is how you build the understanding
+      you need to evaluate AI output effectively.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Tip 4: Leverage Copilot Inline ⚡</h2>
+    <p style="font-size:0.85em;">Copilot reads your code context. Help it help you:</p>
+    <pre><code class="language-javascript" data-trim>
+// Write a clear function name and comment — Copilot does the rest
+
+// Validate email format and return true/false
+function isValidEmail(email) {
+  // Copilot suggests the implementation here ↓
+}
+
+// Format a date as "Month Day, Year" (e.g., "January 15, 2025")
+function formatDate(date) {
+  // Copilot suggests the implementation here ↓
+}
+
+// Fetch user data from API and handle errors
+async function getUser(id) {
+  // Copilot suggests the implementation here ↓
+}
+    </code></pre>
+    <p style="font-size:0.7em; color:#999;">Good naming + comments = better Copilot suggestions</p>
+    <aside class="notes">
+      The function name and comment act as a mini-prompt. Copilot uses them plus
+      your surrounding code to generate implementations. Clear, descriptive names
+      produce dramatically better suggestions.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Tip 5: Always Verify 🔬</h2>
+    <div class="box">
+      <p style="font-size:0.85em;"><strong>The Verification Checklist:</strong></p>
+      <ul style="font-size:0.8em;">
+        <li>☐ Does it run without errors?</li>
+        <li>☐ Does it do what I asked?</li>
+        <li>☐ Have I tested edge cases (empty input, null, large data)?</li>
+        <li>☐ Is user input sanitized? (XSS, injection)</li>
+        <li>☐ Are there hardcoded values that should be configurable?</li>
+        <li>☐ Does it handle network failures gracefully?</li>
+        <li>☐ Is the code readable by a teammate?</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      Keep this checklist handy. Before you commit any AI-generated code,
+      run through these items. Over time this becomes second nature.
+      We'll refer back to this checklist throughout the quarter.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Tip 6: Know When NOT to Use AI 🚫</h2>
+    <ul style="font-size:0.85em;">
+      <li><strong>Security-critical code</strong> — always have a human review</li>
+      <li><strong>Complex business logic</strong> — AI doesn't know your domain</li>
+      <li><strong>When learning fundamentals</strong> — sometimes write it yourself</li>
+      <li><strong>Configuration with secrets</strong> — never paste credentials into AI</li>
+      <li><strong>Novel algorithms</strong> — AI excels at common patterns, not invention</li>
+    </ul>
+    <div class="box-warn" style="margin-top:0.5em;">
+      <p style="font-size:0.75em;">🔐 Never paste API keys, passwords, or private data into ChatGPT or Claude.</p>
+    </div>
+    <aside class="notes">
+      This is about judgment. AI is a tool, not a replacement for thinking.
+      Know its limits and respect them. Security is especially important —
+      never send sensitive data to a cloud AI service.
+    </aside>
+  </section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: LOOKING AHEAD -->
+<!-- ============================================================ -->
+<section>
+
+  <section>
+    <h2>Part 9</h2>
+    <h3 style="color:#64ffda;">Looking Ahead &amp; Assignments</h3>
+  </section>
+
+  <section>
+    <h2>What's Coming This Quarter 🗓️</h2>
+    <table style="font-size:0.7em;">
+      <tr><th>Week</th><th>Topic</th></tr>
+      <tr><td>1</td><td>AI-Assisted Web Dev Foundations (tonight!)</td></tr>
+      <tr><td>2-3</td><td>Modern JavaScript &amp; DOM Manipulation</td></tr>
+      <tr><td>4-5</td><td>React Fundamentals (with AI)</td></tr>
+      <tr><td>6</td><td>State Management &amp; APIs</td></tr>
+      <tr><td>7</td><td>Node.js &amp; Express Backend</td></tr>
+      <tr><td>8</td><td>Databases &amp; Full-Stack Integration</td></tr>
+      <tr><td>9</td><td>Authentication, Deployment &amp; Security</td></tr>
+      <tr><td>10</td><td>Final Project Presentations</td></tr>
+    </table>
+    <aside class="notes">
+      This is the high-level roadmap. Every week builds on the previous one.
+      We go from fundamentals to a full-stack application. AI-assisted
+      development is woven through every week, not a separate topic.
+    </aside>
+  </section>
+
+  <section>
+    <h2>This Week's Assignment</h2>
+    <div class="box" style="font-size:0.8em; text-align:left;">
+      <p><strong>Assignment 1: AI-Assisted Portfolio Page</strong></p>
+      <ul>
+        <li>Use AI to generate a personal portfolio/landing page</li>
+        <li>Must include: header, about section, skills list, contact form</li>
+        <li>Must be responsive (mobile-friendly)</li>
+        <li>Submit: the HTML/CSS/JS files <strong>and</strong> a reflection document</li>
+      </ul>
+      <p style="margin-top:0.5em;"><strong>Reflection must include:</strong></p>
+      <ul>
+        <li>Your prompts (copy-paste each one)</li>
+        <li>What the AI got right and what you had to fix</li>
+        <li>What you learned about HTML/CSS from evaluating the output</li>
+      </ul>
+    </div>
+    <aside class="notes">
+      The reflection is as important as the code. I want to see your prompts
+      and your evaluation process. This helps me understand how you're developing
+      your AI collaboration skills.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Key Takeaways Tonight 🎯</h2>
+    <ol style="font-size:0.85em;">
+      <li><strong>AI is a tool, not a replacement</strong> — you're the engineer</li>
+      <li>The workflow: <span class="highlight-cyan">Prompt → Generate → Evaluate → Debug → Iterate</span></li>
+      <li><strong>Be specific</strong> in your prompts — vague in, vague out</li>
+      <li><strong>Always verify</strong> — AI confidence ≠ correctness</li>
+      <li><strong>Understanding beats memorization</strong> — know <em>what</em> and <em>why</em>, let AI handle <em>how</em></li>
+    </ol>
+    <aside class="notes">
+      These five takeaways are the foundation of everything we'll do this quarter.
+      If you remember nothing else from tonight, remember these.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Resources 📚</h2>
+    <ul style="font-size:0.75em;">
+      <li><strong>MDN Web Docs</strong> — <span class="highlight-blue">developer.mozilla.org</span> (the best web reference)</li>
+      <li><strong>GitHub Copilot Docs</strong> — <span class="highlight-blue">docs.github.com/copilot</span></li>
+      <li><strong>javascript.info</strong> — Modern JavaScript tutorial</li>
+      <li><strong>CSS-Tricks / web.dev</strong> — CSS and web platform guides</li>
+      <li><strong>Node.js Docs</strong> — <span class="highlight-blue">nodejs.org/docs</span></li>
+    </ul>
+    <div class="box" style="margin-top:0.8em;">
+      <p style="font-size:0.75em;">💡 When AI gives you code you don't understand,
+      look it up on MDN. Build the habit of <strong>verifying against official docs</strong>.</p>
+    </div>
+    <aside class="notes">
+      MDN is the gold standard for web documentation. When AI generates something
+      you're unsure about, MDN is your first stop. We'll use these resources
+      throughout the quarter.
+    </aside>
+  </section>
+
+  <section>
+    <h2 style="font-size:2em;">Questions? 🙋</h2>
+    <p class="subtitle" style="margin-top:2em;">
+      See you next week!<br>
+      <span style="font-size:0.8em; color:#64ffda;">Week 2: Modern JavaScript Deep Dive</span>
+    </p>
+    <aside class="notes">
+      Open the floor for questions. Remind students to:
+      1. Finish environment setup before next week
+      2. Start on Assignment 1
+      3. Practice prompting with Copilot or ChatGPT this week
+      4. Read through the MDN HTML and CSS guides if they're rusty
+    </aside>
+  </section>
+
+</section>
+
+</div><!-- end slides -->
+</div><!-- end reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    showSlideNumber: 'all',
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    center: true,
+    plugins: [
+      RevealHighlight,
+      RevealNotes,
+      RevealMarkdown
+    ],
+    // Vertical slides navigation
+    navigationMode: 'default',
+    // Show progress bar
+    progress: true,
+    // Display controls
+    controls: true,
+    // Help overlay
+    help: true,
+    // Loop presentation
+    loop: false,
+    // Fragments
+    fragments: true,
+    // Auto-animate
+    autoAnimate: true,
+    // Width and height
+    width: 1280,
+    height: 720,
+    margin: 0.08,
+  });
+</script>
+</body>
+</html>
