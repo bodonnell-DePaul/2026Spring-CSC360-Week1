@@ -1,6 +1,6 @@
 # CSC 360: Web Applications  
-**Meeting Time:** Wednesday, 5:45 PM – 9:00 PM  
-**Location:** LEWIS 1508, Loop Campus  
+**Meeting Time:** Monday, 5:45 PM – 9:00 PM  
+**Location:** LEWIS 1111, Loop Campus  
 **Course Webpage:** [D2L Portal](https://d2l.depaul.edu)   
 
 ---
