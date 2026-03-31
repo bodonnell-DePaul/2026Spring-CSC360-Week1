@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --color-bg-deep: #191842;
+  --color-bg-mid: #121124;
+  --color-bg-dark: #09080f;
+  --color-text: #f7f2e8;
+  --color-text-muted: #d6d0f2;
+  --color-surface-top: #111028f7;
+  --color-surface-bottom: #0e0d20f7;
+  --color-card-top: #191839f7;
+  --color-card-bottom: #12112cf7;
+  --color-admin-top: #141236f7;
+  --color-admin-bottom: #12102af7;
+  --color-border: #3b3768;
+  --color-border-strong: #4d4980;
+  --color-border-hero: #7269d9;
+  --color-input-bg: #0f0e24;
+  --color-accent: #f6be64;
+  --color-accent-soft: #f4c37a;
+  --color-accent-text: #fce5c0;
+  --color-accent-link: #fcd7a1;
+  --color-accent-glow: #f59e0baa;
+  --color-accent-hover-bg: #f4c37a22;
+  --color-button-top: #d97706;
+  --color-button-bottom: #b45309;
+  --color-button-text: #1a1200;
+  --color-success: #bef8b0;
+  --color-error: #ff9fa5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}

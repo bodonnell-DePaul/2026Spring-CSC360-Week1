@@ -1,0 +1,19 @@
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor swap/temp files
+*.swp
+*.swo
+*~
+
+# .NET build outputs
+demo/backend/bin/
+demo/backend/obj/
+
+# Local SQLite database files
+demo/backend/portfolio.db
+demo/backend/portfolio.db-shm
+demo/backend/portfolio.db-wal
