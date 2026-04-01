@@ -103,7 +103,7 @@ See [`week10/final-project-spec.md`](week10/final-project-spec.md) for the full 
 
 ## 📢 Communication Guidelines  
 - Use Discord for all class-related questions 
-- Download [Discord](https://discord.com).  Join our class server [here](https://discord.gg/VjfeNTyj3r) 
+- Download [Discord](https://discord.com).  Join our class server [here](https://discord.gg/tdBz98zK) 
 - Include class in email subject lines  
 - Include full name in email body  
 - For code help:  
